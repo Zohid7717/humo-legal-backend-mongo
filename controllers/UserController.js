@@ -38,7 +38,7 @@ export const register = async (req, res) => {
       message: 'Не удалось регистрироватся!'
     });
   }
-};
+}
 
 export const login = async (req, res) => {
   try {
@@ -93,4 +93,3 @@ export const getMe = async (req, res) => {
     });
   }
 }
-

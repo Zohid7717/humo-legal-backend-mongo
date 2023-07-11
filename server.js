@@ -7,6 +7,8 @@ import { registerValidation, loginValidation, postCreateValidation } from './uti
 import handleValidationErrors from './utils/handleValidationErrors.js';
 import checkAuth from './utils/checkAuth.js';
 import cors from 'cors'
+import  fs from 'fs';
+import path from 'path';
 
 const PORT = 3000;
 const URL = "mongodb://0.0.0.0:27017/humo-legal";
@@ -48,6 +50,21 @@ app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
     url: `/uploads/${req.file.originalname}`,
   })
 });
+
+app.delete('/delete/:filename', checkAuth, (req, res) => {
+  const filename = req.params.filename;
+  const filePath = path.join('uploads', filename);
+  if (fs.existsSync(filePath)) {
+    fs.unlinkSync(filePath);
+    res.json({
+      message: 'Файл успешно удален!'
+    })
+  } else {
+    res.status(404).json({
+      message: 'Файл не найден!'
+    })
+  }
+})
 
 app.listen(PORT, (err) => {
   err ? console.log(err) : console.log(`Listening port ${PORT}`);
