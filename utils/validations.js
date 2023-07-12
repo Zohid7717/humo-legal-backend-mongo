@@ -19,3 +19,9 @@ export const postCreateValidation = [
   body('category', 'Введите категорию информации!').isString(),
   body('imageUrl', 'Неверная ссылка на изображения!').optional().isString(),
 ];
+export const reviewCreateValidation = [
+  body('title', 'Введите компанию!').isLength({ min: 3 }).isString(),
+  body('text', 'Введите текст отзыва!').isLength({ min: 10 }).isString(),
+  body('author', 'Введите автора отзыва!').isString(),
+  body('imageUrl', 'Неверная ссылка на изображения!').optional().isString(),
+];

@@ -1,14 +1,17 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import multer from 'multer';
-import * as UserController from './controllers/UserController.js';
-import * as PostController from './controllers/PostControllers.js';
-import { registerValidation, loginValidation, postCreateValidation } from './utils/validations.js'
-import handleValidationErrors from './utils/handleValidationErrors.js';
-import checkAuth from './utils/checkAuth.js';
 import cors from 'cors'
 import  fs from 'fs';
 import path from 'path';
+
+import * as UserController from './controllers/UserController.js';
+import * as PostController from './controllers/PostControllers.js';
+import * as ReviewsControllers from './controllers/ReviewsControllers.js';
+
+import { registerValidation, loginValidation, postCreateValidation, reviewCreateValidation } from './utils/validations.js'
+import handleValidationErrors from './utils/handleValidationErrors.js';
+import checkAuth from './utils/checkAuth.js';
 
 const PORT = 3000;
 const URL = "mongodb://0.0.0.0:27017/humo-legal";
@@ -50,7 +53,6 @@ app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
     url: `/uploads/${req.file.originalname}`,
   })
 });
-
 app.delete('/delete/:filename', checkAuth, (req, res) => {
   const filename = req.params.filename;
   const filePath = path.join('uploads', filename);
@@ -65,6 +67,10 @@ app.delete('/delete/:filename', checkAuth, (req, res) => {
     })
   }
 })
+
+app.post('/createReview', checkAuth, reviewCreateValidation, handleValidationErrors, ReviewsControllers.create);
+app.delete('/removeReview/:id', checkAuth, ReviewsControllers.remove)
+app.get('/allReviews', ReviewsControllers.getAll);
 
 app.listen(PORT, (err) => {
   err ? console.log(err) : console.log(`Listening port ${PORT}`);
