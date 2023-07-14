@@ -5,7 +5,7 @@ export const create = async (req, res) => {
     const doc = new PostModel({
       title: req.body.title,
       text: req.body.text,
-      source: req.body.source,
+      paramTree: req.body.paramTree,
       category: req.body.category,
       imageUrl: req.body.imageUrl,
     });
@@ -43,7 +43,6 @@ export const remove = async (req, res) => {
 
 export const getAll = async (req, res) => {
   try {
-
     const posts = await PostModel.find();
     res.json(posts);
   } catch (error) {

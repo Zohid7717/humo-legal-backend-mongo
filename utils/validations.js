@@ -15,13 +15,18 @@ export const registerValidation = [
 export const postCreateValidation = [
   body('title', 'Введите загаловок!').isLength({ min: 3 }).isString(),
   body('text', 'Введите текст статьи!').isLength({ min: 10 }).isString(),
-  body('source', 'Введите источник информации!').isLength({ min: 3 }).isString(),
+  body('paramTree', 'Введите источник информации!').isLength({ min: 3 }).isString(),
   body('category', 'Введите категорию информации!').isString(),
   body('imageUrl', 'Неверная ссылка на изображения!').optional().isString(),
 ];
 export const reviewCreateValidation = [
   body('title', 'Введите компанию!').isLength({ min: 3 }).isString(),
   body('text', 'Введите текст отзыва!').isLength({ min: 10 }).isString(),
-  body('author', 'Введите автора отзыва!').isString(),
+  body('paramTree', 'Введите автора отзыва!').isString(),
+  body('imageUrl', 'Неверная ссылка на изображения!').optional().isString(),
+];
+export const servicesCreateValidation = [
+  body('title', 'Введите услугу!').isLength({ min: 5 }).isString(),
+  body('text', 'Введите описание услуги!').isLength({ min: 10 }).isString(),
   body('imageUrl', 'Неверная ссылка на изображения!').optional().isString(),
 ];

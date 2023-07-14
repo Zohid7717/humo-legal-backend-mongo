@@ -10,7 +10,7 @@ const ReviewsSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
-    author: {
+    paramTree: {
       type: String,
       require: true,
     },

@@ -10,7 +10,7 @@ const PostSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
-    source: {
+    paramTree: {
       type: String,
       require: true,
     },

@@ -5,7 +5,7 @@ export const create = async (req, res) => {
     const doc = new ReviewModel({
       title: req.body.title,
       text: req.body.text,
-      author: req.body.author,
+      paramTree: req.body.paramTree,
       imageUrl: req.body.imageUrl,
     });
     const review = await doc.save();

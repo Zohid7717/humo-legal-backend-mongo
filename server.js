@@ -8,8 +8,9 @@ import path from 'path';
 import * as UserController from './controllers/UserController.js';
 import * as PostController from './controllers/PostControllers.js';
 import * as ReviewsControllers from './controllers/ReviewsControllers.js';
+import * as ServicesControllers from './controllers/ServicesControllers.js'
 
-import { registerValidation, loginValidation, postCreateValidation, reviewCreateValidation } from './utils/validations.js'
+import { registerValidation, loginValidation, postCreateValidation, reviewCreateValidation, servicesCreateValidation } from './utils/validations.js'
 import handleValidationErrors from './utils/handleValidationErrors.js';
 import checkAuth from './utils/checkAuth.js';
 
@@ -71,6 +72,11 @@ app.delete('/delete/:filename', checkAuth, (req, res) => {
 app.post('/createReview', checkAuth, reviewCreateValidation, handleValidationErrors, ReviewsControllers.create);
 app.delete('/removeReview/:id', checkAuth, ReviewsControllers.remove)
 app.get('/allReviews', ReviewsControllers.getAll);
+
+app.post('/createService', checkAuth, servicesCreateValidation, handleValidationErrors, ServicesControllers.create);
+app.delete('/removeService/:id', checkAuth, ServicesControllers.remove);
+app.get('/allServices', ServicesControllers.getAll);
+app.post('/oneService/:id', ServicesControllers.getOne);
 
 app.listen(PORT, (err) => {
   err ? console.log(err) : console.log(`Listening port ${PORT}`);
