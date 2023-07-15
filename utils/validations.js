@@ -30,3 +30,15 @@ export const servicesCreateValidation = [
   body('text', 'Введите описание услуги!').isLength({ min: 10 }).isString(),
   body('imageUrl', 'Неверная ссылка на изображения!').optional().isString(),
 ];
+export const staffCreateValidation = [
+  body('title', 'Введите имя сотрудника!').isLength({ min: 5 }).isString(),
+  body('text', 'Введите информацию о сотруднике!').isLength({ min: 10 }).isString(),
+  body('imageUrl', 'Неверная ссылка на изображения!').optional().isString(),
+];
+export const requestCreateValidation = [
+  body('fullName', 'Введите имя!').isLength({ min: 3 }).isString(),
+  body('surname', 'Введите фамилию!').isLength({ min: 3 }).isString(),
+  body('phone', 'Введите номер телефона!').isLength({ min: 9 }).isString(),
+  body('time', 'Введите время удобная для Вас!').isString(),
+  body('question', 'Введите вопрос!').isString(),
+];

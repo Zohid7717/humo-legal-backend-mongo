@@ -9,8 +9,9 @@ import * as UserController from './controllers/UserController.js';
 import * as PostController from './controllers/PostControllers.js';
 import * as ReviewsControllers from './controllers/ReviewsControllers.js';
 import * as ServicesControllers from './controllers/ServicesControllers.js'
+import * as StaffControllers from './controllers/StaffControllers.js'
 
-import { registerValidation, loginValidation, postCreateValidation, reviewCreateValidation, servicesCreateValidation } from './utils/validations.js'
+import { registerValidation, loginValidation, postCreateValidation, reviewCreateValidation, servicesCreateValidation, staffCreateValidation } from './utils/validations.js'
 import handleValidationErrors from './utils/handleValidationErrors.js';
 import checkAuth from './utils/checkAuth.js';
 
@@ -77,6 +78,11 @@ app.post('/createService', checkAuth, servicesCreateValidation, handleValidation
 app.delete('/removeService/:id', checkAuth, ServicesControllers.remove);
 app.get('/allServices', ServicesControllers.getAll);
 app.post('/oneService/:id', ServicesControllers.getOne);
+
+app.post('/createStaff', checkAuth, staffCreateValidation, handleValidationErrors, StaffControllers.create);
+app.delete('/removeStaff/:id', checkAuth, StaffControllers.remove);
+app.get('/allStaff', StaffControllers.getAll);
+app.post('/oneStaff/:id', StaffControllers.getOne);
 
 app.listen(PORT, (err) => {
   err ? console.log(err) : console.log(`Listening port ${PORT}`);
