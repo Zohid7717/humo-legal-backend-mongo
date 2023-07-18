@@ -36,9 +36,11 @@ export const staffCreateValidation = [
   body('imageUrl', 'Неверная ссылка на изображения!').optional().isString(),
 ];
 export const requestCreateValidation = [
-  body('fullName', 'Введите имя!').isLength({ min: 3 }).isString(),
-  body('surname', 'Введите фамилию!').isLength({ min: 3 }).isString(),
   body('phone', 'Введите номер телефона!').isLength({ min: 9 }).isString(),
   body('time', 'Введите время удобная для Вас!').isString(),
   body('question', 'Введите вопрос!').isString(),
+];
+export const questionCreateValidation = [
+  body('title', 'Введите вопрос!').isLength({ min: 3 }).isString(),
+  body('text', 'Введите ответ!').isLength({ min: 3 }).isString()
 ];

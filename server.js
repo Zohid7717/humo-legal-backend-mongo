@@ -10,8 +10,10 @@ import * as PostController from './controllers/PostControllers.js';
 import * as ReviewsControllers from './controllers/ReviewsControllers.js';
 import * as ServicesControllers from './controllers/ServicesControllers.js'
 import * as StaffControllers from './controllers/StaffControllers.js'
+import * as RequestControllers from './controllers/RequestControllers.js'
+import * as QuestionControllers from './controllers/QuestionControllers.js'
 
-import { registerValidation, loginValidation, postCreateValidation, reviewCreateValidation, servicesCreateValidation, staffCreateValidation } from './utils/validations.js'
+import { registerValidation, loginValidation, postCreateValidation, reviewCreateValidation, servicesCreateValidation, staffCreateValidation, requestCreateValidation, questionCreateValidation } from './utils/validations.js'
 import handleValidationErrors from './utils/handleValidationErrors.js';
 import checkAuth from './utils/checkAuth.js';
 
@@ -83,6 +85,15 @@ app.post('/createStaff', checkAuth, staffCreateValidation, handleValidationError
 app.delete('/removeStaff/:id', checkAuth, StaffControllers.remove);
 app.get('/allStaff', StaffControllers.getAll);
 app.post('/oneStaff/:id', StaffControllers.getOne);
+
+app.post('/createRequest', requestCreateValidation, handleValidationErrors, RequestControllers.create);
+app.delete('/removeRequest/:id', checkAuth, RequestControllers.remove)
+app.get('/allRequest', RequestControllers.getAll);
+
+app.post('/createQuestion', checkAuth, questionCreateValidation, handleValidationErrors, QuestionControllers.create);
+app.delete('/removeQuestion/:id', checkAuth, QuestionControllers.remove)
+app.get('/allQuestion', QuestionControllers.getAll);
+app.get('/getLimit', QuestionControllers.getLimit);
 
 app.listen(PORT, (err) => {
   err ? console.log(err) : console.log(`Listening port ${PORT}`);

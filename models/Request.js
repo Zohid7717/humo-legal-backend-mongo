@@ -4,7 +4,6 @@ const RequestSchema = new mongoose.Schema(
   {
     fullName: {
       type: String,
-      require: true,
     },
     surname: {
       type: String,
